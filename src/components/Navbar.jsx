@@ -10,7 +10,7 @@ const Navbar = () => {
 
     return (
         <nav className="sticky transition duration-300 backdrop-blur-lg py-3 top-0 z-50 border-b border-neutral-700">
-            <div className="px-16 lg:px-12 relative">
+            <div className="px-4 md:px-8 lg:px-12 relative">
                 <div className="flex relative justify-between items-center">
                     <a className="flex items-center gap-2" href="#">
                         <div className="">
