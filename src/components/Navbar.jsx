@@ -12,16 +12,16 @@ const Navbar = () => {
         <nav className="sticky transition duration-300 backdrop-blur-lg py-3 top-0 z-50 border-b border-neutral-700">
             <div className="px-16 lg:px-12 relative">
                 <div className="flex relative justify-between items-center">
-                    <div className="flex items-center gap-2 cursor-pointer">
+                    <a className="flex items-center gap-2" href="#">
                         <div className="">
                             <img src={logo} alt="logo" width={45} />
                         </div>
                         <span className="font-semibold text-2xl text-zinc-200">VirtualR</span>
-                    </div>
+                    </a>
 
                     <ul className="ml-14 space-x-10 hidden lg:flex ">
                         {navItems.map(item => (
-                            <li key={item.name} className="hover:text-green-400">
+                            <li key={item.label} className="hover:text-green-400">
                                 <a href={item.href}>{item.label}</a>
                             </li>
                         ))}
@@ -32,8 +32,8 @@ const Navbar = () => {
                         <ButtonGradient label='Create an account' />
                     </div>
 
-                    <div className="flex lg:hidden">
-                        <button onClick={() => setMenuToggle(!menuToggle)} className=" transition duration-300 ease-in-out">
+                    <div className="flex lg:hidden ">
+                        <button onClick={() => setMenuToggle(!menuToggle)} className=" transition duration-300 ease-in-out cursor-pointer">
                             {menuToggle ? <X /> : <Menu />}
                         </button>
                     </div>
@@ -44,7 +44,7 @@ const Navbar = () => {
                             <ul className="gap-5 flex flex-col">
                                 {navItems.map(item => (
                                     <li key={item.name} className="hover:text-green-400">
-                                        <a href={item.href}>{item.label}</a>
+                                        <a href={item.href} onClick={() => setMenuToggle(false)}>{item.label}</a>
                                     </li>
                                 ))}
                             </ul>

@@ -13,8 +13,8 @@ const Workflow = () => {
                 </div>
 
                 <div className='w-full sm:w-2/3 lg:w-1/2 flex flex-col justify-between py-6 gap-6 sm:gap-4'>
-                    {checklistItems.map(item => (
-                        <div className='flex gap-4'>
+                    {checklistItems.map((item, index) => (
+                        <div key={index} className='flex gap-0 sm:gap-4'>
                             <div className="text-green-400 mx-6 bg-neutral-900 h-10 w-10 p-2 justify-center items-center rounded-full">
                                 <CheckCircle2 />
                             </div>
