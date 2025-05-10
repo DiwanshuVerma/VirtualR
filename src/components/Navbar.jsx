@@ -3,11 +3,35 @@ import ButtonGradient from "./ButtonGradient";
 import ButtonTrans from "./ButtonTrans";
 import logo from '/logo.png'
 import { Menu, X } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const Navbar = () => {
     const [menuToggle, setMenuToggle] = useState(false)
 
+    const sectionIds = navItems.map(item => item.href.replace("#", ""));
+
+    const [activeSection, setActiveSection] = useState("")
+
+    useEffect(() => {
+        const observer = new IntersectionObserver(
+            (entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        setActiveSection(entry.target.id)
+                    }
+                })
+            }, {
+            threshold: 0.6
+        }
+        )
+
+        sectionIds.forEach(id => {
+            const ele = document.getElementById(id)
+            if (ele) observer.observe(ele)
+        })
+
+        return () => observer.disconnect()
+    }, [])
     return (
         <nav className="sticky transition duration-300 backdrop-blur-lg py-3 top-0 z-50 border-b border-neutral-700">
             <div className="px-4 md:px-8 lg:px-12 relative">
@@ -20,11 +44,16 @@ const Navbar = () => {
                     </a>
 
                     <ul className="ml-14 space-x-10 hidden lg:flex ">
-                        {navItems.map(item => (
-                            <li key={item.label} className="hover:text-green-400">
-                                <a href={item.href}>{item.label}</a>
-                            </li>
-                        ))}
+                        {navItems.map(item => {
+                            const id = item.href.replace("#", "");
+                            return (
+                                <li key={item.label} className={`${activeSection === id ? "text-green-500 font-semibold" : "text-white"
+                                    } hover:text-green-400 transition-colors`}>
+                                    <a href={item.href}>{item.label}</a>
+                                </li>
+                            )
+                        }
+                        )}
                     </ul>
 
                     <div className="space-x-5 hidden lg:flex ">
